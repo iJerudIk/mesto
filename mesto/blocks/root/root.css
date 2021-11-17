@@ -1,0 +1,16 @@
+.root{
+  margin: 0;
+  padding: 45px 0 60px;
+  background-color: #000;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar-button{
+  background-repeat:no-repeat;
+  width:0px;
+  height:0px
+}
+::-webkit-scrollbar{
+  height: 0px;
+  width: 0px;
+}
