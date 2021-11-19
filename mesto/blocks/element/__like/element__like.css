@@ -6,4 +6,9 @@
   background: #fff;
   border: none;
   cursor: pointer;
+  transition: 0.3s opacity ease-in;
+}
+
+.element__like:hover{
+  opacity: 0.5;
 }

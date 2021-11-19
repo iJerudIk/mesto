@@ -1,0 +1,14 @@
+.form__submit-button{
+  width: 100%;
+  padding: 14px 125px;
+  background: #000;
+  border: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}

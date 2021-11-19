@@ -4,3 +4,9 @@
   margin: 0 auto 67px;
   padding: 1px 0;
 }
+
+@media screen and (max-width: 767px){
+  .elements{
+    margin-bottom: 48px;
+  }
+}

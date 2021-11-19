@@ -1,4 +1,4 @@
-.profile__about-me{
+.profile__job{
   margin: 0;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
@@ -6,4 +6,12 @@
   font-size: 18px;
   line-height: 22px;
   color: #fff;
+}
+
+@media screen and (max-width: 767px){
+  .profile__job{
+    margin-bottom: 33px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
