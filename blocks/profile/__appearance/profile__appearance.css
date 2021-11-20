@@ -1,5 +1,6 @@
 .profile__appearance{
   display: flex;
+  width: calc(100% - 169px);
 }
 
 @media screen and (max-width: 767px){

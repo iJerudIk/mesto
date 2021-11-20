@@ -1,0 +1,6 @@
+.profile__info{
+  display: grid;
+  grid-auto-rows: repeat(2, auto);
+  grid-row-gap: 8px;
+  margin-top: 22px;
+}
