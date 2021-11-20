@@ -1,0 +1,12 @@
+.profile__wrapper{
+  margin: 22px 0 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 767px){
+  .profile__wrapper{
+    margin-top: 26px;
+    margin-bottom: 7px;
+  }
+}
