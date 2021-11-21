@@ -5,11 +5,13 @@ let formElement = document.querySelector('.popup__form');
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__job');
 
-let inputName = document.querySelector('.form__name');
-let inputJob = document.querySelector('.form__job');
+let inputName = document.querySelector('.popup__field-name');
+let inputJob = document.querySelector('.popup__field-job');
 
 let popup = document.querySelector('.popup');
 
+inputName.value = profileName.textContent;
+inputJob.value = profileJob.textContent;
 
 function togglePopup(){
   popup.classList.toggle('popup_opened');

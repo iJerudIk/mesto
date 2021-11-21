@@ -1,4 +1,4 @@
-.element__like{
+.elements__like{
   width: 22px;
   height: 19px;
   padding: 0;
@@ -9,6 +9,6 @@
   transition: 0.3s opacity ease-in;
 }
 
-.element__like:hover{
+.elements__like:hover{
   opacity: 0.5;
 }

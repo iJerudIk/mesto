@@ -20,11 +20,10 @@
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/elements/__list/elements__list.css');
 @import url('../blocks/elements/__element/elements__element.css');
-
-@import url('../blocks/element/__image/element__image.css');
-@import url('../blocks/element/__bottom/element__bottom.css');
-@import url('../blocks/element/__name/element__name.css');
-@import url('../blocks/element/__like/element__like.css');
+@import url('../blocks/elements/__image/elements__image.css');
+@import url('../blocks/elements/__bottom/elements__bottom.css');
+@import url('../blocks/elements/__name/elements__name.css');
+@import url('../blocks/elements/__like/elements__like.css');
 
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
@@ -34,7 +33,6 @@
 @import url('../blocks/popup/__content/popup__content.css');
 @import url('../blocks/popup/__name/popup__name.css');
 @import url('../blocks/popup/__close-button/popup__close-button.css');
-
-@import url('../blocks/form/__name/form__name.css');
-@import url('../blocks/form/__job/form__job.css');
-@import url('../blocks/form/__submit-button/form__submit-button.css');
+@import url('../blocks/popup/__field-name/popup__field-name.css');
+@import url('../blocks/popup/__field-job/popup__field-job.css');
+@import url('../blocks/popup/__submit-button/popup__submit-button.css');
