@@ -1,5 +1,6 @@
 .profile__name{
   margin: 0;
+  margin-right: 18px;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -12,8 +13,10 @@
 }
 
 @media screen and (max-width: 767px){
-  .profile__name{           /* Я знаю что во многих местах эти мрджины не совпадают с макетом, */
-    font-size: 27px;        /* но в макете базавая линия строк находися не на самом нижнем элементе */
-    line-height: 33px;      /* + в некоторых местах высота элементов текста ранва 26px(в этом случае), а line-height: текст равен 33px */
-  }                         /* как это понимать непонятно */
+  .profile__name{
+    margin-right: 10px;
+    margin-left: 28px;
+    font-size: 27px;
+    line-height: 33px;
+  }
 }

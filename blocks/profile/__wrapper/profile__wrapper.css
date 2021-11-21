@@ -1,14 +1,11 @@
 .profile__wrapper{
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-column-gap: 18px;
-  align-items: center;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 7px;
 }
 
 @media screen and (max-width: 767px){
   .profile__wrapper{
-    margin-top: 26px;
-    margin-bottom: 7px;
+    justify-content: center;
   }
 }
