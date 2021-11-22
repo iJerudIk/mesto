@@ -1,9 +1,9 @@
 .elements__like{
   width: 22px;
   height: 19px;
-  padding: 0;
+  background-image: url('../../../images/like-inactive.svg');
+  background-color: #fff;
   margin: 5px 5px 1px 0;
-  background: #fff;
   border: none;
   cursor: pointer;
   transition: 0.3s opacity ease-in;
@@ -11,4 +11,8 @@
 
 .elements__like:hover{
   opacity: 0.5;
+}
+
+.elements__like_active{
+  background-image: url('../../../images/like-active.svg');
 }
