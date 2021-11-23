@@ -1,8 +1,6 @@
 .popup__content{
   position: relative;
-  width: calc(100% - 28px);
-  max-width: 430px;
-  height: 330px;
+  width: 430px;
   padding: 34px 36px 37px;
   box-sizing: border-box;
   background: #fff;
@@ -11,6 +9,7 @@
 
 @media screen and (max-width: 767px){
   .popup__content{
+    width: 282px;
     padding: 25px 22px;
   }
 }

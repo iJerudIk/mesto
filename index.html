@@ -17,14 +17,12 @@
         <div class="profile__info">
           <div class="profile__wrapper">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" name="edit-button" class="profile__edit-button"></button>
+            <button type="button" name="edit-button" class="profile__edit-button" aria-label="редактирование профиля"></button>
           </div>
           <p class="profile__job">Исследователь океана</p>
         </div>
       </div>
-      <div class="profile__add-button">
-        <img src="./images/plus.png" alt="плюс">
-      </div>
+      <button type="button" name="add-button" aria-label="добавление изображения" class="profile__add-button"></button>
     </section>
     <section class="elements">
       <ul class="elements__list">
@@ -36,28 +34,28 @@
           </div>
         </li>
         <li class="elements__element">
-          <img src="./images/elbrus.png" alt="старое здание на холме" class="elements__image">
+          <img src="./images/elbrus.png" alt="равнина" class="elements__image">
           <div class="elements__bottom">
             <h2 class="elements__name">Гора Эльбрус</h2>
             <button type="button" name="like" class="elements__like"></button>
           </div>
         </li>
         <li class="elements__element">
-          <img src="./images/dombai.png" alt="старое здание на холме" class="elements__image">
+          <img src="./images/dombai.png" alt="горы и лес" class="elements__image">
           <div class="elements__bottom">
             <h2 class="elements__name">Домбай</h2>
             <button type="button" name="like" class="elements__like"></button>
           </div>
         </li>
         <li class="elements__element">
-          <img src="./images/elbrus.png" alt="старое здание на холме" class="elements__image">
+          <img src="./images/elbrus.png" alt="равнина" class="elements__image">
           <div class="elements__bottom">
             <h2 class="elements__name">Гора Эльбрус</h2>
             <button type="button" name="like" class="elements__like"></button>
           </div>
         </li>
         <li class="elements__element">
-          <img src="./images/dombai.png" alt="старое здание на холме" class="elements__image">
+          <img src="./images/dombai.png" alt="горы и лес" class="elements__image">
           <div class="elements__bottom">
             <h2 class="elements__name">Домбай</h2>
             <button type="button" name="like" class="elements__like"></button>
@@ -77,17 +75,17 @@
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
 
-  <section class="popup">
+  <div class="popup">
     <div class="popup__content">
       <button type="button" name="button-close" class="popup__close-button"></button>
       <h3 class="popup__name">Редактировать профиль</h3>
-      <form class="popup__form" method="post">
+      <form class="popup__form" method="post" name="Редактирование профиля">
         <input type="text" name="name" placeholder="Ваше имя" class="popup__input popup__input_content_name">
         <input type="text" name="job" placeholder="Кто вы?" class="popup__input popup__input_content_job">
         <button type="submit" name="button-submit" class="popup__submit-button">Сохранить</button>
       </form>
     </div>
-  </section>
+  </div>
 
   <script src="./scripts/script.js"></script>
 </body>
