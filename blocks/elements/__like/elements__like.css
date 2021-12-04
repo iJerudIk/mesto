@@ -6,6 +6,7 @@
   margin: 5px 5px 1px 0;
   border: none;
   cursor: pointer;
+  user-select: none;
   transition: 0.3s opacity ease-in;
 }
 
