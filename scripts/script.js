@@ -84,7 +84,7 @@ function makeNewPopup(placeTitle, placeLink, placeElement) {
 
   placePopupContainer.prepend(placePopup);
 
-  placeElement.addEventListener('click', function (){
+  placeElement.querySelector('.elements__image').addEventListener('click', function (){
     placePopup.classList.add('popup-place_opened');
   });
   placePopup.querySelector('.popup-place__close-button').addEventListener('click', function (){
