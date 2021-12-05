@@ -87,6 +87,9 @@ function makeNewPopup(placeTitle, placeLink, placeElement) {
   placeElement.querySelector('.elements__image').addEventListener('click', function (){
     placePopup.classList.add('popup-place_opened');
   });
+  placeElement.querySelector('.elements__delete-button').addEventListener('click', function (){
+    placePopup.remove();
+  });
   placePopup.querySelector('.popup-place__close-button').addEventListener('click', function (){
     placePopup.classList.remove('popup-place_opened');
   });
@@ -103,7 +106,6 @@ function makeNewPlace(placeTitle, placeLink){
   });
   placeElement.querySelector('.elements__delete-button').addEventListener('click', function (){
     placeElement.remove();
-    initialCards.pop();
   });
 
   makeNewPopup(placeTitle, placeLink, placeElement);
@@ -121,7 +123,6 @@ function addPlace(evt){
 
   makeNewPlace(inputTitle.value, inputLink.value);
 
-  initialCards.push({title: inputTitle.value, link: inputLink.value});
   closeAddPopup();
 }
 
