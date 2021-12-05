@@ -39,8 +39,8 @@
       <button type="button" name="button-close" class="popup__close-button"></button>
       <h3 class="popup__name">Редактировать профиль</h3>
       <form class="popup__form" method="post" name="Editing a profile">
-        <input type="text" name="name" placeholder="Ваше имя" class="popup__input popup__input_content_name">
-        <input type="text" name="job" placeholder="Кто вы?" class="popup__input popup__input_content_job">
+        <input type="text" name="name" required placeholder="Ваше имя" class="popup__input popup__input_content_name">
+        <input type="text" name="job" required placeholder="Кто вы?" class="popup__input popup__input_content_job">
         <button type="submit" name="button-submit" class="popup__submit-button">Сохранить</button>
       </form>
     </div>
@@ -51,15 +51,19 @@
       <button type="button" name="button-close" class="popup__close-button"></button>
       <h3 class="popup__name">Новое место</h3>
       <form class="popup__form" method="post" name="Add new place">
-        <input type="text" name="title" placeholder="Название" class="popup__input popup__input_content_title">
-        <input type="text" name="link" placeholder="Ссылка на картинку" class="popup__input popup__input_content_link">
+        <input type="text" name="title" required placeholder="Название" class="popup__input popup__input_content_title">
+        <input type="text" name="link" required placeholder="Ссылка на картинку" class="popup__input popup__input_content_link">
         <button type="submit" name="button-submit" class="popup__submit-button">Создать</button>
       </form>
     </div>
   </div>
 
-  <div class="place-popup-container">
-
+  <div class="popup popup_content_place-info">
+    <div class="popup__content popup__content_content_image">
+      <button type="button" name="button-close" class="popup__close-button"></button>
+      <img class="popup__image">
+      <h2 class="popup__title"></h2>
+    </div>
   </div>
 
   <template id="place-template">
@@ -71,16 +75,6 @@
         <button class="elements__like"></button>
       </div>
     </li>
-  </template>
-
-  <template id="place-popup-template">
-    <div class="popup-place">
-      <div class="popup-place__content">
-        <button type="button" name="button-close" class="popup-place__close-button"></button>
-        <img class="popup-place__image">
-        <h2 class="popup-place__title"></h2>
-      </div>
-    </div>
   </template>
 
   <script src="./scripts/script.js"></script>

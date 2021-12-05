@@ -19,7 +19,6 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
 const placesContainer = document.querySelector('.elements__list');
-const placePopupContainer = document.querySelector('.place-popup-container');
 
 const initialCards = [
   {
@@ -49,53 +48,22 @@ const initialCards = [
 ];
 
 
-function openEditPopup(){
-  inputName.value = profileName.textContent;
-  inputJob.value = profileJob.textContent;
-  popupEdit.classList.add('popup_opened');
-}
-function openAddPopup(){
-  inputTitle.value = '';
-  inputLink.value = '';
-  popupAdd.classList.add('popup_opened');
+function openPopup(popup){
+  popup.classList.add('popup_opened');
 }
 
-function closeEditPopup(){
-  popupEdit.classList.remove('popup_opened');
-}
-function closeAddPopup(){
-  popupAdd.classList.remove('popup_opened');
+function closePopup(popup){
+  popup.classList.remove('popup_opened');
 }
 
 function editFormSubmitHandler(evt){
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
-  closeEditPopup();
+  closePopup(popupEdit);
 }
 
-
-function makeNewPopup(placeTitle, placeLink, placeElement) {
-  const placePopupTemplate = document.querySelector('#place-popup-template').content;
-  const placePopup = placePopupTemplate.querySelector('.popup-place').cloneNode(true);
-
-  placePopup.querySelector('.popup-place__title').textContent = placeTitle;
-  placePopup.querySelector('.popup-place__image').setAttribute('src', placeLink);
-
-  placePopupContainer.prepend(placePopup);
-
-  placeElement.querySelector('.elements__image').addEventListener('click', function (){
-    placePopup.classList.add('popup-place_opened');
-  });
-  placeElement.querySelector('.elements__delete-button').addEventListener('click', function (){
-    placePopup.remove();
-  });
-  placePopup.querySelector('.popup-place__close-button').addEventListener('click', function (){
-    placePopup.classList.remove('popup-place_opened');
-  });
-}
-
-function makeNewPlace(placeTitle, placeLink){
+function createCard(placeTitle, placeLink){
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.elements__element').cloneNode(true);
 
@@ -107,28 +75,48 @@ function makeNewPlace(placeTitle, placeLink){
   placeElement.querySelector('.elements__delete-button').addEventListener('click', function (){
     placeElement.remove();
   });
+  placeElement.querySelector('.elements__image').addEventListener('click', function (evt){
+    const placePopup = document.querySelector('.popup_content_place-info');
+    placePopup.querySelector('.popup__image').setAttribute('src', placeLink);
+    placePopup.querySelector('.popup__image').setAttribute('alt', placeTitle);
+    placePopup.querySelector('.popup__title').textContent = placeTitle;
+    placePopup.classList.add('popup_opened');
+    placePopup.querySelector('.popup__close-button').addEventListener('click', function (){
+      placePopup.classList.remove('popup_opened');
+    })
+  });
 
-  makeNewPopup(placeTitle, placeLink, placeElement);
-
-  placesContainer.prepend(placeElement);
+  return placeElement;
 }
 
 
 initialCards.forEach(function(item){
-  makeNewPlace(item.title, item.link);
+  placesContainer.prepend(createCard(item.title, item.link));
 });
 
 function addPlace(evt){
   evt.preventDefault();
 
-  makeNewPlace(inputTitle.value, inputLink.value);
+  placesContainer.prepend(createCard(inputTitle.value, inputLink.value));
 
-  closeAddPopup();
+  closePopup(popupAdd);
 }
 
-editButton.addEventListener('click', openEditPopup);
-addButton.addEventListener('click', openAddPopup);
+editButton.addEventListener('click', function (){
+  inputName.value = profileName.textContent;
+  inputJob.value = profileJob.textContent;
+  openPopup(popupEdit);
+});
+addButton.addEventListener('click', function (){
+  inputTitle.value = '';
+  inputLink.value = '';
+  openPopup(popupAdd);
+});
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 addFormElement.addEventListener('submit', addPlace);
-editPopupCloseButton.addEventListener('click', closeEditPopup);
-addPopupCloseButton.addEventListener('click', closeAddPopup);
+editPopupCloseButton.addEventListener('click', function (){
+  closePopup(popupEdit);
+});
+addPopupCloseButton.addEventListener('click', function (){
+  closePopup(popupAdd);
+});
