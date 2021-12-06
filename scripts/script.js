@@ -1,8 +1,10 @@
 const popupEdit = document.querySelector('.popup_content_profile');
 const popupAdd = document.querySelector('.popup_content_add-place');
+const placePopup = document.querySelector('.popup_content_place-info');
 
 const editPopupCloseButton = popupEdit.querySelector('.popup__close-button');
 const addPopupCloseButton = popupAdd.querySelector('.popup__close-button');
+const placePopupCloseButton = placePopup.querySelector('.popup__close-button');
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -67,8 +69,12 @@ function createCard(placeTitle, placeLink){
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.elements__element').cloneNode(true);
 
+  const elementImage = placeElement.querySelector('.elements__image');
+  const popupImage = placePopup.querySelector('.popup__image');
+
   placeElement.querySelector('.elements__title').textContent = placeTitle;
-  placeElement.querySelector('.elements__image').setAttribute('src', placeLink);
+  elementImage.setAttribute('src', placeLink);
+  elementImage.setAttribute('alt', placeTitle);
   placeElement.querySelector('.elements__like').addEventListener('click', function (evt){
     evt.target.classList.toggle('elements__like_active');
   });
@@ -76,14 +82,10 @@ function createCard(placeTitle, placeLink){
     placeElement.remove();
   });
   placeElement.querySelector('.elements__image').addEventListener('click', function (evt){
-    const placePopup = document.querySelector('.popup_content_place-info');
-    placePopup.querySelector('.popup__image').setAttribute('src', placeLink);
-    placePopup.querySelector('.popup__image').setAttribute('alt', placeTitle);
+    popupImage.setAttribute('src', placeLink);
+    popupImage.setAttribute('alt', placeTitle);
     placePopup.querySelector('.popup__title').textContent = placeTitle;
-    placePopup.classList.add('popup_opened');
-    placePopup.querySelector('.popup__close-button').addEventListener('click', function (){
-      placePopup.classList.remove('popup_opened');
-    })
+    openPopup(placePopup);
   });
 
   return placeElement;
@@ -100,6 +102,8 @@ function addPlace(evt){
   placesContainer.prepend(createCard(inputTitle.value, inputLink.value));
 
   closePopup(popupAdd);
+  inputTitle.value = '';
+  inputLink.value = '';
 }
 
 editButton.addEventListener('click', function (){
@@ -108,8 +112,6 @@ editButton.addEventListener('click', function (){
   openPopup(popupEdit);
 });
 addButton.addEventListener('click', function (){
-  inputTitle.value = '';
-  inputLink.value = '';
   openPopup(popupAdd);
 });
 editFormElement.addEventListener('submit', editFormSubmitHandler);
@@ -120,3 +122,6 @@ editPopupCloseButton.addEventListener('click', function (){
 addPopupCloseButton.addEventListener('click', function (){
   closePopup(popupAdd);
 });
+placePopupCloseButton.addEventListener('click', function (){
+  closePopup(placePopup);
+})
