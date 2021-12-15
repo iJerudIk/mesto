@@ -49,20 +49,29 @@ const initialCards = [
   }
 ];
 
-
 function openPopup(popup){
   popup.classList.add('popup_opened');
+
+  function keyHandler (evt){
+    if(evt.key === 'Escape'){
+      closePopup(popup);
+    }
+    popup.parentElement.removeEventListener('keydown', keyHandler);
+  }
+
+  function overlayHandler (evt){
+    if(evt.target === popup){
+      closePopup(popup);
+      popup.removeEventListener('click', overlayHandler);
+    }
+  }
+
+  popup.parentElement.addEventListener('keydown', keyHandler);
+  popup.addEventListener('click', overlayHandler)
 }
 
 function closePopup(popup){
   popup.classList.remove('popup_opened');
-}
-
-function editFormSubmitHandler(evt){
-  evt.preventDefault();
-  profileName.textContent = inputName.value;
-  profileJob.textContent = inputJob.value;
-  closePopup(popupEdit);
 }
 
 function createCard(placeTitle, placeLink){
@@ -104,18 +113,17 @@ function addPlace(evt){
   closePopup(popupAdd);
   inputTitle.value = '';
   inputLink.value = '';
+  console.log(inputTitle);
 }
 
+inputName.value = profileName.textContent;
+inputJob.value = profileJob.textContent;
 editButton.addEventListener('click', function (){
-  inputName.value = profileName.textContent;
-  inputJob.value = profileJob.textContent;
   openPopup(popupEdit);
 });
 addButton.addEventListener('click', function (){
   openPopup(popupAdd);
 });
-editFormElement.addEventListener('submit', editFormSubmitHandler);
-addFormElement.addEventListener('submit', addPlace);
 editPopupCloseButton.addEventListener('click', function (){
   closePopup(popupEdit);
 });
@@ -124,4 +132,24 @@ addPopupCloseButton.addEventListener('click', function (){
 });
 placePopupCloseButton.addEventListener('click', function (){
   closePopup(placePopup);
-})
+});
+
+
+editFormElement.addEventListener('submit', function (evt){
+  evt.preventDefault();
+  profileName.textContent = inputName.value;
+  profileJob.textContent = inputJob.value;
+  closePopup(popupEdit);
+});
+addFormElement.addEventListener('submit', addPlace);
+
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  fieldErrorClass: 'popup__field_type_error',
+  errorClass: 'popup__error_visible'
+});

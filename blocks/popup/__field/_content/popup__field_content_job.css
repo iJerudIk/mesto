@@ -1,0 +1,9 @@
+.popup__field_content_job{
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 767px){
+  .popup__field_content_job{
+    margin-bottom: 45px;
+  }
+}
