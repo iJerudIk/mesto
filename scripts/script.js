@@ -22,6 +22,8 @@ const profileJob = document.querySelector('.profile__job');
 
 const placesContainer = document.querySelector('.elements__list');
 
+const placeTemplate = document.querySelector('#place-template').content;
+
 const initialCards = [
   {
     title: 'Архыз',
@@ -49,24 +51,25 @@ const initialCards = [
   }
 ];
 
+function keyHandler (evt){
+  if(evt.key === 'Escape'){
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+    document.removeEventListener('keydown', keyHandler);
+  }
+}
+function overlayHandler (evt){
+  if(evt.target.classList.contains('popup')){
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+    openedPopup.removeEventListener('click', overlayHandler);
+  }
+}
+
 function openPopup(popup){
   popup.classList.add('popup_opened');
 
-  function keyHandler (evt){
-    if(evt.key === 'Escape'){
-      closePopup(popup);
-    }
-    popup.parentElement.removeEventListener('keydown', keyHandler);
-  }
-
-  function overlayHandler (evt){
-    if(evt.target === popup){
-      closePopup(popup);
-      popup.removeEventListener('click', overlayHandler);
-    }
-  }
-
-  popup.parentElement.addEventListener('keydown', keyHandler);
+  document.addEventListener('keydown', keyHandler);
   popup.addEventListener('click', overlayHandler)
 }
 
@@ -75,7 +78,6 @@ function closePopup(popup){
 }
 
 function createCard(placeTitle, placeLink){
-  const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.elements__element').cloneNode(true);
 
   const elementImage = placeElement.querySelector('.elements__image');
@@ -113,13 +115,15 @@ function addPlace(evt){
   closePopup(popupAdd);
   inputTitle.value = '';
   inputLink.value = '';
-  console.log(inputTitle);
+  deactivateButton(popupAdd.querySelector('.popup__submit-button'), 'popup__submit-button_disabled');
 }
 
 inputName.value = profileName.textContent;
 inputJob.value = profileJob.textContent;
 editButton.addEventListener('click', function (){
   openPopup(popupEdit);
+  inputName.value = profileName.textContent;
+  inputJob.value = profileJob.textContent;
 });
 addButton.addEventListener('click', function (){
   openPopup(popupAdd);

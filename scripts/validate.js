@@ -29,11 +29,20 @@ const hasInvalidInput = (inputList) => {
   });
 }
 
+function deactivateButton (buttonElement, inactiveButtonClass){
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.setAttribute('disabled', 'true');
+}
+function activateButton (buttonElement, inactiveButtonClass){
+  buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.removeAttribute('disabled');
+}
+
 const toggleButtonState = (inputList, buttonElement, parameters) => {
   if (hasInvalidInput(inputList)){
-    buttonElement.classList.add(parameters.inactiveButtonClass);
+    deactivateButton(buttonElement, parameters.inactiveButtonClass);
   }else{
-    buttonElement.classList.remove(parameters.inactiveButtonClass);
+    activateButton(buttonElement, parameters.inactiveButtonClass);
   }
 }
 
