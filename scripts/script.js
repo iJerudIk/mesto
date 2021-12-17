@@ -55,14 +55,12 @@ function keyHandler (evt){
   if(evt.key === 'Escape'){
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
-    document.removeEventListener('keydown', keyHandler);
   }
 }
 function overlayHandler (evt){
   if(evt.target.classList.contains('popup')){
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
-    openedPopup.removeEventListener('click', overlayHandler);
   }
 }
 
@@ -75,6 +73,9 @@ function openPopup(popup){
 
 function closePopup(popup){
   popup.classList.remove('popup_opened');
+
+  document.removeEventListener('keydown',  keyHandler);
+  popup.removeEventListener('click', overlayHandler);
 }
 
 function createCard(placeTitle, placeLink){
@@ -118,12 +119,12 @@ function addPlace(evt){
   deactivateButton(popupAdd.querySelector('.popup__submit-button'), 'popup__submit-button_disabled');
 }
 
-inputName.value = profileName.textContent;
-inputJob.value = profileJob.textContent;
 editButton.addEventListener('click', function (){
   openPopup(popupEdit);
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
+
+  activateButton(popupEdit.querySelector('.popup__submit-button'), 'popup__submit-button_disabled'); // на 121 строчке присвоение было нужно для этой кнопке
 });
 addButton.addEventListener('click', function (){
   openPopup(popupAdd);
