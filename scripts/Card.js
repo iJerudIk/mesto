@@ -1,6 +1,5 @@
 // Импорты
-import { openPopup, closePopup } from './script.js';
-import { placePopupCloseButton } from './script.js';
+import { openPopup} from './script.js';
 
 // Данные попапа
 const popupElement = document.querySelector('.popup_content_place-info');

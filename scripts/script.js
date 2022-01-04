@@ -10,7 +10,7 @@ const popupPlace = document.querySelector('.popup_content_place-info');
 
 const editPopupCloseButton = popupEdit.querySelector('.popup__close-button');
 const addPopupCloseButton = popupAdd.querySelector('.popup__close-button');
-export const placePopupCloseButton = popupPlace.querySelector('.popup__close-button');
+const placePopupCloseButton = popupPlace.querySelector('.popup__close-button');
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -48,7 +48,7 @@ export function openPopup(popup) {
   document.addEventListener('keydown', closeByEscape);
   popup.addEventListener('click', closeByOverlay);
 }
-export function closePopup(popup) {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
   document.removeEventListener('keydown',  closeByEscape);
@@ -83,10 +83,7 @@ initialCards.forEach(function(item) {
 editButton.addEventListener('click', function() {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
-  formEdit.inputList.forEach((inputElement) => {
-    formEdit.checkInputValidaty(inputElement);
-    formEdit.toggleButtonState();
-  });
+  formEdit.resetErrors();
 
   formEdit.activateButton();
 
