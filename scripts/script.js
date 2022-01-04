@@ -1,13 +1,16 @@
 // Импорты
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import { initialCards } from './initialCards.js';
 
 // Константы
 const popupEdit = document.querySelector('.popup_content_profile');
 const popupAdd = document.querySelector('.popup_content_add-place');
+const popupPlace = document.querySelector('.popup_content_place-info');
 
 const editPopupCloseButton = popupEdit.querySelector('.popup__close-button');
 const addPopupCloseButton = popupAdd.querySelector('.popup__close-button');
+export const placePopupCloseButton = popupPlace.querySelector('.popup__close-button');
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -25,58 +28,31 @@ const profileJob = document.querySelector('.profile__job');
 
 const placesContainer = document.querySelector('.elements__list');
 
-const initialCards = [
-  {
-    title: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    title: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    title: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    title: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    title: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    title: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // Открытие / Закрытие попапов
-function keyHandler(evt) {
+function closeByEscape(evt) {
   if(evt.key === 'Escape'){
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
-function overlayHandler(evt) {
+function closeByOverlay(evt) {
   if(evt.target.classList.contains('popup')){
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
 
-  document.addEventListener('keydown', keyHandler);
-  popup.addEventListener('click', overlayHandler)
+  document.addEventListener('keydown', closeByEscape);
+  popup.addEventListener('click', closeByOverlay);
 }
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
-  document.removeEventListener('keydown',  keyHandler);
-  popup.removeEventListener('click', overlayHandler);
+  document.removeEventListener('keydown',  closeByEscape);
+  popup.removeEventListener('click', closeByOverlay);
 }
 
 // Подключение валидации
@@ -95,16 +71,23 @@ const formAdd = new FormValidator(parameters, document.forms.newPlace); formAdd.
 
 
 // Добавление первоначальный карточек
+function createCard(title, link, selector) {
+  const card = new Card(title, link, selector);
+  return card.generateCard();
+}
+
 initialCards.forEach(function(item) {
-  const card = new Card(item.title, item.link, "#place-template");
-  const cardElement = card.generateCard();
-  placesContainer.append(cardElement);
+  placesContainer.append(createCard(item.title, item.link, "#place-template"));
 });
 
 // Слушатели кнопок
 editButton.addEventListener('click', function() {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
+  formEdit.inputList.forEach((inputElement) => {
+    formEdit.checkInputValidaty(inputElement);
+    formEdit.toggleButtonState();
+  });
 
   formEdit.activateButton();
 
@@ -119,7 +102,9 @@ editPopupCloseButton.addEventListener('click', function() {
 addPopupCloseButton.addEventListener('click', function() {
   closePopup(popupAdd);
 });
-
+placePopupCloseButton.addEventListener('click', function() {
+  closePopup(popupPlace);
+});
 
 editFormElement.addEventListener('submit', function(evt) {
   evt.preventDefault();
@@ -130,12 +115,9 @@ editFormElement.addEventListener('submit', function(evt) {
 addFormElement.addEventListener('submit', function(evt) {
   evt.preventDefault();
 
-  const card = new Card(inputTitle.value, inputLink.value, "#place-template");
-  const cardElement = card.generateCard();
-
-  placesContainer.prepend(cardElement);
+  placesContainer.prepend(createCard(inputTitle.value, inputLink.value, "#place-template"));
 
   closePopup(popupAdd);
-  inputTitle.value = '';
-  inputLink.value = '';
+  formAdd.deactivateButton();
+  addFormElement.reset();
 });

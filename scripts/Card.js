@@ -1,8 +1,11 @@
+// Импорты
+import { openPopup, closePopup } from './script.js';
+import { placePopupCloseButton } from './script.js';
+
 // Данные попапа
 const popupElement = document.querySelector('.popup_content_place-info');
 const popupImage = popupElement.querySelector('.popup__image');
 const popupTitle = popupElement.querySelector('.popup__title');
-const placePopupCloseButton = popupElement.querySelector('.popup__close-button');
 
 
 export class Card {
@@ -28,17 +31,8 @@ export class Card {
     popupImage.setAttribute('src', this._link);
     popupImage.setAttribute('alt', this._title);
     popupTitle.textContent = this._title;
-    popupElement.classList.add('popup_opened');
 
-    document.addEventListener('keydown', (evt) => {this._keyHandler(evt)});
-    popupElement.addEventListener('click', (evt) => {this._overlayHandler(evt)})
-  }
-
-  _handleClosePopup() {
-    popupElement.classList.remove('popup_opened');
-
-    document.removeEventListener('keydown', (evt) => {this._keyHandler(evt)});
-    popupElement.removeEventListener('click', (evt) => {this._overlayHandler(evt)});
+    openPopup(popupElement);
   }
 
   // Установка слушателей
@@ -46,21 +40,13 @@ export class Card {
     this._element.querySelector('.elements__image').addEventListener('click', () => {
       this._handleOpenPopup();
     });
-
-    placePopupCloseButton.addEventListener('click', () => {
-      this._handleClosePopup();
+    this._element.querySelector('.elements__like').addEventListener('click', (evt) => {
+      evt.target.classList.toggle('elements__like_active');
     });
-  }
-
-  _keyHandler(evt) {
-    if(evt.key === 'Escape'){
-      this._handleClosePopup();
-    }
-  }
-  _overlayHandler(evt) {
-    if(evt.target.classList.contains('popup')){
-      this._handleClosePopup();
-    }
+    this._element.querySelector('.elements__delete-button').addEventListener('click', () => {
+      this._element.remove();
+      this._element = null;
+    });
   }
 
   // Генерирование карточки
@@ -71,13 +57,6 @@ export class Card {
     this._element.querySelector('.elements__image').setAttribute('src', this._link);
     this._element.querySelector('.elements__image').setAttribute('alt', this._title);
     this._element.querySelector('.elements__title').textContent = this._title;
-
-    this._element.querySelector('.elements__like').addEventListener('click', function (evt){
-      evt.target.classList.toggle('elements__like_active');
-    });
-    this._element.querySelector('.elements__delete-button').addEventListener('click', () => {
-      this._element.remove();
-    });
 
     return this._element;
   }
