@@ -67,6 +67,6 @@ export class FormValidator {
   };
 
   enableValidation() {
-    this._setEventListeners(); // Как-то глупо, но этого требует задание
+    this._setEventListeners();
   }
 }

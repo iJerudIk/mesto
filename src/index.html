@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="root">
   <header class="header">
-    <a href="#"><img src="./images/logo.svg" alt="логотип" class="header__logo"></a>
+    <a href="#"><img src="<%=require('./images/logo.svg')%>" alt="логотип" class="header__logo"></a>
   </header>
   <main class="content">
     <section class="profile">
       <div class="profile__appearance">
-        <img src="./images/profile-image.svg" alt="Пожилой мужчина" class="profile__avatar">
+        <img src="<%=require('./images/profile-image.svg')%>" alt="Пожилой мужчина" class="profile__avatar">
         <div class="profile__info">
           <div class="profile__wrapper">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -39,7 +38,7 @@
       <button type="button" name="button-close" class="popup__close-button"></button>
       <h3 class="popup__name">Редактировать профиль</h3>
       <form class="popup__form" name="editingProfile" novalidate>
-        <div class="popup__field popup__field_content_name">       <!-- Почему-то с label хреново работает -->
+        <div class="popup__field popup__field_content_name">
           <input type="text" name="name" placeholder="Ваше имя" id="name-input" class="popup__input popup__input_content_name" required minlength="2" maxlength="40">
           <span class="popup__input-error name-input-error"></span>
         </div>
@@ -89,6 +88,6 @@
     </li>
   </template>
 
-  <script type="module" src="./scripts/script.js"></script>
+  <script type="module" src="./index.js"></script>
 </body>
 </html>

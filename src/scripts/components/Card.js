@@ -1,17 +1,18 @@
 // Импорты
-import { openPopup} from './script.js';
+import { popupPlace } from '../../pages/index.js';
 
 // Данные попапа
-const popupElement = document.querySelector('.popup_content_place-info');
-const popupImage = popupElement.querySelector('.popup__image');
-const popupTitle = popupElement.querySelector('.popup__title');
+export const popupElement = document.querySelector('.popup_content_place-info');
+export const popupImage = popupElement.querySelector('.popup__image');
+export const popupTitle = popupElement.querySelector('.popup__title');
 
 
 export class Card {
-  constructor(placeTitle, placeLink, cardSelector) {
-    this._title = placeTitle;
-    this._link = placeLink;
+  constructor({ handleCardClick }, item, cardSelector) {
+    this._title = item.title;
+    this._link = item.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   // Получение -template элемента
@@ -25,19 +26,10 @@ export class Card {
     return cardElement;
   }
 
-  // Открытие / Закрытие попапов
-  _handleOpenPopup() {
-    popupImage.setAttribute('src', this._link);
-    popupImage.setAttribute('alt', this._title);
-    popupTitle.textContent = this._title;
-
-    openPopup(popupElement);
-  }
-
   // Установка слушателей
   _setEventListeners() {
     this._element.querySelector('.elements__image').addEventListener('click', () => {
-      this._handleOpenPopup();
+      this._handleCardClick();
     });
     this._element.querySelector('.elements__like').addEventListener('click', (evt) => {
       evt.target.classList.toggle('elements__like_active');
