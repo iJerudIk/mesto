@@ -32,15 +32,13 @@ const user = new UserInfo('.profile__name', '.profile__job');
 
 // Создание попапов
 const popupEdit = new PopupWithForm({
-  submitRenderer : () => {
-    const userInfo = popupEdit._getInputValues()
+  submitRenderer : (userInfo) => {
     user.setUserInfo(userInfo);
     popupEdit.close();
   }
 }, '.popup_content_profile');
 const popupAdd = new PopupWithForm({
-  submitRenderer : () => {
-    const cardInfo = popupAdd._getInputValues()
+  submitRenderer : (cardInfo) => {
     const cardElement = createCard(cardInfo);
     defaultCardList.addItem(cardElement);
 
