@@ -27,17 +27,21 @@ export const initialCards = [
 ];
 
 // Другие константы
-export const popupEdit = document.querySelector('.popup_content_profile');
-export const popupAdd = document.querySelector('.popup_content_add-place');
-export const popupPlace = document.querySelector('.popup_content_place-info');
-
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
 
+
+export const popupEdit = document.querySelector('.popup_content_profile');
 export const editFormElement = popupEdit.querySelector('.popup__form');
-export const addFormElement = popupAdd.querySelector('.popup__form');
 
 export const inputName = editFormElement.querySelector('.popup__input_content_name');
 export const inputJob = editFormElement.querySelector('.popup__input_content_job');
-export const inputTitle = addFormElement.querySelector('.popup__input_content_title');
-export const inputLink = addFormElement.querySelector('.popup__input_content_link');
+
+export const parameters = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};

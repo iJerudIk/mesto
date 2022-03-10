@@ -1,12 +1,3 @@
-// Импорты
-import { popupPlace } from '../../pages/index.js';
-
-// Данные попапа
-export const popupElement = document.querySelector('.popup_content_place-info');
-export const popupImage = popupElement.querySelector('.popup__image');
-export const popupTitle = popupElement.querySelector('.popup__title');
-
-
 export class Card {
   constructor({ handleCardClick }, item, cardSelector) {
     this._title = item.title;

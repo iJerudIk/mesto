@@ -1,13 +1,5 @@
 // Импорты
-import '../styles/pages/index.css';
-
-const logoImage = new URL('../images/logo.svg', import.meta.url);
-const profileImage = new URL('../images/profile-image.svg', import.meta.url);
-
-const whoIsTheGoat = [
-  {name : 'логотип', image : logoImage},
-  {name : 'Пожилой мужчина', link : profileImage}
-];
+import './index.css';
 
 import { Card } from '../scripts/components/Card.js';
 import { Section } from '../scripts/components/Section.js';
@@ -21,11 +13,11 @@ import {
   editButton, addButton,
   inputName,
   inputJob,
-  inputTitle,
-  inputLink,
-  editFormElement, addFormElement,
+  parameters
 } from '../scripts/utils/constants.js';
 
+
+// Создание секции
 const defaultCardList = new Section({
   items : initialCards,
   renderer : (item) => {
@@ -35,32 +27,21 @@ const defaultCardList = new Section({
 }, '.elements__list');
 defaultCardList.renderItems();
 
-function createCard(item, selector) {
-  const card = new Card({
-    handleCardClick : () => {
-      popupPlace.open({ data : {
-        image : card._link,
-        title : card._title
-      } });
-    }
-  }, item, selector);
-  const cardElement = card.generateCard();
-
-  return cardElement;
-}
-
+// Создание юсера
 const user = new UserInfo('.profile__name', '.profile__job');
 
 // Создание попапов
 const popupEdit = new PopupWithForm({
   submitRenderer : () => {
-    user.setUserInfo(popupEdit._getInputValues());
+    const userInfo = popupEdit._getInputValues()
+    user.setUserInfo(userInfo);
     popupEdit.close();
   }
 }, '.popup_content_profile');
 const popupAdd = new PopupWithForm({
   submitRenderer : () => {
-    const cardElement = createCard(popupAdd._getInputValues(), '#place-template');
+    const cardInfo = popupAdd._getInputValues()
+    const cardElement = createCard(cardInfo);
     defaultCardList.addItem(cardElement);
 
     popupAdd.close();
@@ -69,22 +50,26 @@ const popupAdd = new PopupWithForm({
 }, '.popup_content_add-place');
 export const popupPlace = new PopupWithImage('.popup_content_place-info');
 
-popupEdit.setEventListeners();
-popupAdd.setEventListeners();
-popupPlace.setEventListeners();
-
 // Подключение валидации
-const parameters = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
 const formEdit = new FormValidator(parameters, document.forms.editingProfile); formEdit.enableValidation();
 const formAdd = new FormValidator(parameters, document.forms.newPlace); formAdd.enableValidation();
+
+
+// Функции
+function createCard(item) {
+  const card = new Card({
+    handleCardClick : () => {
+      popupPlace.open({ data : {
+        image : card._link,
+        title : card._title
+      } });
+    }
+  }, item, '#place-template');
+  const cardElement = card.generateCard();
+
+  return cardElement;
+}
+
 
 // Слушатели кнопок
 editButton.addEventListener('click', function() {
@@ -103,3 +88,9 @@ addButton.addEventListener('click', function() {
 
   popupAdd.open();
 });
+
+
+// Вызов функций
+popupEdit.setEventListeners();
+popupAdd.setEventListeners();
+popupPlace.setEventListeners();
