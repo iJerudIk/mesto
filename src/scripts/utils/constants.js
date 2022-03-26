@@ -29,13 +29,13 @@ export const initialCards = [
 // Другие константы
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
-
+export const avatarButton = document.querySelector('.profile__avatar');
 
 export const popupEdit = document.querySelector('.popup_content_profile');
 export const editFormElement = popupEdit.querySelector('.popup__form');
 
 export const inputName = editFormElement.querySelector('.popup__input_content_name');
-export const inputJob = editFormElement.querySelector('.popup__input_content_job');
+export const inputAbout = editFormElement.querySelector('.popup__input_content_job');
 
 export const parameters = {
   formSelector: '.popup__form',
