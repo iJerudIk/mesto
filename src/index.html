@@ -61,7 +61,7 @@
       <h3 class="popup__name">Обновить аватар</h3>
       <form class="popup__form" name="editingAvatar" novalidate>
         <div class="popup__field popup__field_content_name">
-          <input type="text" name="link" placeholder="Ссылка" id="avatar-link-input" class="popup__input popup__input_content_avatar-link">
+          <input type="url" name="link" placeholder="Ссылка" id="avatar-link-input" class="popup__input popup__input_content_avatar-link" required>
           <span class="popup__input-error avatar-link-input-error"></span>
         </div>
         <button type="submit" name="button-submit" class="popup__submit-button">Сохранить</button>
@@ -118,7 +118,5 @@
       </div>
     </li>
   </template>
-
-  <script type="module" src="./index.js"></script>
 </body>
 </html>

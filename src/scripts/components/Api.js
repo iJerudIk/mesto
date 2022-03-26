@@ -9,13 +9,7 @@ export class Api {
       method : 'GET',
       headers : this._headers
     })
-      .then((res) => {
-        if(res.ok) return res.json();
-        return Promise.reject(`Ошибка ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
+      .then(this._checkResponse)
   }
 
   addNewCard(cardInfo, button) {
@@ -27,32 +21,14 @@ export class Api {
         link: cardInfo.link
       })
     })
-      .then((res) => {
-        if(res.ok) return res.json();
-        return Promise.reject(`Ошибка ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
-      .finally(() => {
-        this.renderLoading(button, 'Создать');
-      })
+      .then(this._checkResponse)
   }
   removeCard(cardId, button) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method : 'DELETE',
       headers : this._headers
     })
-      .then((res) => {
-        if(res.ok) return res.json();
-        return Promise.reject(`Ошибка ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
-      .finally(() => {
-        this.renderLoading(button, 'Да');
-      })
+      .then(this._checkResponse)
   }
 
   getUserInfo() {
@@ -60,13 +36,7 @@ export class Api {
       method : 'GET',
       headers : this._headers
     })
-      .then((res) => {
-        if(res.ok) return res.json();
-        return Promise.reject(`Ошибка ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
+      .then(this._checkResponse)
   }
   setUserInfo(userInfo, button) {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -77,16 +47,7 @@ export class Api {
         about: userInfo.about
       })
     })
-      .then((res) => {
-        if(res.ok) return res.json();
-        return Promise.reject(`Ошибка ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
-      .finally(() => {
-        this.renderLoading(button, 'Сохранить');
-      })
+      .then(this._checkResponse)
   }
   setUserAvatar(avatarLink, button) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
@@ -96,46 +57,26 @@ export class Api {
         avatar: avatarLink,
       })
     })
-      .then((res) => {
-        if(res.ok) return res.json();
-        return Promise.reject(`Ошибка ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
-      .finally(() => {
-        this.renderLoading(button, 'Сохранить');
-      })
+      .then(this._checkResponse)
   }
 
   setLike(cardId) {
-    fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method : 'PUT',
       headers : this._headers
     })
-      .then((res) => {
-        if(res.ok) return res.json();
-        return Promise.reject(`Ошибка ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
+      .then(this._checkResponse)
   }
   removeLike(cardId) {
-    fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method : 'DELETE',
       headers : this._headers
     })
-      .then((res) => {
-        if(res.ok) return res.json();
-        return Promise.reject(`Ошибка ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
+      .then(this._checkResponse)
   }
 
-  renderLoading(button, text){
-    button.textContent = text
+  _checkResponse(res){
+    if (res.ok) return res.json();
+    return Promise.reject(`Ошибка ${res.status}`);
   }
 }

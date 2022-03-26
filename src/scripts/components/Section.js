@@ -6,12 +6,13 @@ export class Section {
   }
 
   addItem(element) {
-    this._container.prepend(element);
+    const card = this._renderer(element)
+    this._container.prepend(card);
   }
 
   renderItems() {
     this._renderedItems.forEach(item => {
-      this._renderer(item);
+      this.addItem(item);
     });
   }
 }

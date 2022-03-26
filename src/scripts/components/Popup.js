@@ -23,13 +23,13 @@ export class Popup {
   }
   _handleOverlayClose(evt) {
     if(evt.target.classList.contains('popup')){
-      this.close(this._popup);
+      this.close();
     }
   }
 
 // Установка / Удаление слушателей
   setEventListeners() {
     this._popup.querySelector('.popup__close-button').addEventListener('click', this.close.bind(this));
-    this._popup.addEventListener('click', this._handleOverlayClose.bind(this));
+    this._popup.addEventListener('mousedown', this._handleOverlayClose.bind(this));
   }
 }
