@@ -65,27 +65,24 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
           } });
         },
         handleCardDelete : () => {popupDelete.open(card)},
-        handleCardLike : () => {
-          if(!card.isLiked) {
+        handleCardLike : (isLiked) => {
+          if(!isLiked) {
             api.setLike(card._id)
-              .then((likes) => {
-                card._likeButton.classList.add('elements__like-button_active');
-                card._numberLikes.textContent = likes.length;
+              .then((element) => {
+                card.updateLikes(element.likes);
               })
               .catch((err) => {
                 console.log(`Ошибка : ${err}`);
               })
           }else{
             api.removeLike(card._id)
-              .then((likes) => {
-                card._likeButton.classList.remove('elements__like-button_active');
-                card._numberLikes.textContent = likes.length;
+              .then((element) => {
+                card.updateLikes(element.likes);
               })
               .catch((err) => {
                 console.log(`Ошибка : ${err}`);
               })
           }
-          card.isLiked = !card.isLiked;
         }
       }, item, userId, '#place-template');
       const cardElement = card.generateCard();
